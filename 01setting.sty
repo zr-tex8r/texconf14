@@ -1,0 +1,60 @@
+%
+% 01setting.sty
+%   TeX レベルでの設定
+%
+
+%% 巨大文字サイズ
+  % ↓extsize 14pt での設定
+  %\newcommand\huge{\@setfontsize\huge{29.86}{35}}
+\newcommand\hhuge{\@setfontsize\hhuge{35.83}{40}} %=\Huge
+\newcommand\hhhuge{\@setfontsize\hhuge{43.00}{48}}
+\newcommand\hhhhuge{\@setfontsize\hhhuge{51.60}{56}}
+\newcommand\hhhhhuge{\@setfontsize\hhhhuge{61.92}{66}}
+
+%% \myjdash: 倍角ダーシ
+\def\myjdash{―\kern-.5em―\kern-.5em―}
+
+%% \myverb
+\def\myverb#1{%
+  {\let\\=\textbackslash
+  \ttfamily #1}}
+
+%% TeX on LaTeX のロゴの「on」
+% 本来は small-caps にするのが正式であるが、
+% この文書のフォントでは対応していないので
+% サイズ縮小で代用している。
+\def\my@ONscale{0.72}
+\def\myON{%
+  \begingroup
+    \@tempdima=\f@size\p@
+    \@tempdima=\my@ONscale\@tempdima
+    \edef\@tempa{{\@tempdima}{\@tempdima}}%
+    \expandafter\fontsize\@tempa\selectfont
+    ON%
+  \endgroup}
+
+%% PDF文書情報中文字列
+\pdfstringdefDisableCommands{%
+  \def\<{}%
+  \def\>{}%
+  \def\myON{on}%
+  \def\myjdash{――}%
+}
+
+%% \myphantom
+\def\myphantom#1{%
+  \begingroup
+  \leavevmode
+  \setbox\z@\hbox{#1}%
+  \vrule\@width\z@\@height\ht\z@\@depth\dp\z@
+  \vrule\@width\wd\z@\@height\z@\@depth\z@
+  \endgroup
+}
+
+% デバッグ用設定
+\errorcontextlines=9
+\tracingoutput=2
+\showboxdepth=100
+\showboxbreadth=100
+
+% EOF

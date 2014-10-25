@@ -1,0 +1,290 @@
+\documentclass[xetex,14pt]{beamer}
+\usepackage{01setting}% TeXレベルの設定
+\usepackage{manfnt}% 「Dangerous bend」マーク
+\usepackage{zxjatype}
+\usepackage{metalogo}
+\usepackage{tikz}% TikZはアレ
+\input{02setting}% LaTeXレベルの設定
+%----------------------------------------------------------------------
+%% 文書情報
+\title{dvipdfmxと3つのバッド・ノウハウ}
+\author[八登崇之]{八登崇之 (Takayuki YATO)}
+\date{2014年11月8日 {\TeX}ユーザの集い 2014}
+\subject{dvipdfmxはアレ}
+\keywords{\TeX,\LaTeX}
+%%
+\begin{document}
+%=======================================================================
+
+\input{10title}% タイトル
+\section{バッド・ノウハウの魔}
+\input{20badkh}
+\section{その① ドライバ詐称}
+\input{30fdn}
+\section{その② バウンディングボックス詐称}
+\input{31fbb}
+\section{その③ 面倒なのでピクセル単位}
+\input{32lip}
+\section{正しさのすすめ}
+\input{40justice}
+
+\end{document}
+% EOF
+\iffalse%
+
+◇
+dvipdfmxと
+3つのバッド・ノウハウ
+
+◇
+この物語《LT》は
+LaTeX + dvipdfmxでの
+画像の挿入に関する
+封印された
+バッドノウハウの
+記録である。
+
+◇
+バッド・ノウハウ
+is
+何
+
+◇
+このLTにおいて！
+バッド・ノウハウ
+is
+バグ技
+
+◇
+正攻法       バッド・ノウハウ
+正しいコード    /間違ったコード/
+↓              
+欲しい出力      （仕様上結果は未定義）
+;-)
+〈つまらない〉
+
+is
+バグ技
+
+◇
+正攻法       バッド・ノウハウ
+正しいコード    /間違ったコード/
+↓              ↓偶然
+欲しい出力      欲しい出力
+;-)             8-P ｲｲﾈ!
+
+バージョンアップ！
+
+◇
+正攻法       バッド・ノウハウ
+正しいコード    /間違ったコード/
+↓              ↓偶然
+欲しい出力      .間'違:っ:た 出  力
+;-)             X-O ｳﾜｧｧｧｧ
+
+◇
+バッドノウハウ
+その①
+ドライバ詐称
+false driver name
+
+◇
+\usepackage[dvipdfmx]{graphicx}
+;-)
+
+[zr@texconf14]$ dvipdfmx talk.dvi
+
+
+◇
+\usepackage[dvipdfm]{graphicx}
+8-P
+
+[zr@texconf14]$ dvipdfmx talk.dvi
+
+◇
+\usepackage[dvips]{graphicx}
+\usepackage[dviout]{graphicx}
+
+
+◇
+（ソース①）
+
+◇
+TeX Live 2012
+8-P
+
+◇
+TeX Live 2013
+X-O
+
+◇
+楽しい！！！
+
+◇
+バッドノウハウ
+その②
+バウンディングボックス詐称
+false bounding box
+
+◇
+画像ファイルは固有の
+“バウンディングボックス”（bbox）
+を持っている。
+
+texconf.pdf
+
+bboxの値
+[100 100 500 500]
+
+◇
+画像ファイルは固有の
+“バウンディングボックス”（bbox）
+を持っている。
+
+texconf.png
+
+bboxの値
+[0 0 400 400]
+
+
+◇
+（extractbb しない場合）
+正しいbboxの値の指定が必要。
+
+\includegraphics[
+  bb=0 0 400 400,
+  width=6cm]{texconf.png}
+:-)
+
+◇
+間違ったbboxの値の指定。
+（8-P「画像の一部を切り出したい」）
+
+\includegraphics[
+  bb=200 300 300 400,
+  width=6cm]{texconf.png}
+8-P
+
+◇
+TeX Live 2012
+8-P
+
+◇
+TeX Live 最新
+X-O
+
+◇
+楽しい！！！
+
+◇
+バッドノウハウ
+その③
+面倒なのでピクセル単位
+lazily-in-pixels
+
+◇
+texconf.png
+96dpi
+400x400
+
+正しいbboxの値は？
+
+
+◇
+texconf.png
+96dpi
+400x400
+
+解像度は 96dpi
+∴ 96 px = 1 in = 72 bp
+∴ 400 px = 300bp
+
+◇
+texconf.png
+96dpi
+400x400
+
+bb=[0 0 300 300]
+:-)
+
+◇
+texconf.png
+96dpi
+400x400
+
+bb=[0 0 400 400]
+8-P
+
+◇
+2006年頃
+8-P
+
+◇
+最新
+X-O
+
+◇
+楽しくない！
+X-O
+
+◇
+正しいコードを書こう！
+;-)
+まさに正論
+
+◇
+dvipdfm
+
+
+◇
+dvipdfm
+は 2013年7月を以て
+終了
+致しました。
+:-) Thank you & Good bye! :-)
+
+◇
+ステップ０
+dvipdfm ×
+dvipdfmx
+を使う。
+
+◇
+ステップ①
+（現状の TeX Live では）
+extractbb の自動起動を有効にする。
+その方法は…
+
+◇
+TeX Wiki 見ろ。
+以上。
+
+◇
+ステップ③
+dvipdfmx ドライバを指定する
+
+\usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
+
+◇
+ステップ④
+\includegraphics する。
+bb は付けない。
+
+\includegraphics[width=6cm]{texconf.png}
+
+◇
+ステップ⑤
+結果。
+
+〈なんと画像がちゃんと入ります。すごいですね。〉
+
+◇
+楽しい
+
+◇
+Happy
+   TeXing!
+〈以上です〉
+
+\fi%
