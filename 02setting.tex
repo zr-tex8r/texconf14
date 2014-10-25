@@ -19,6 +19,9 @@
 \newfontfamily\fntHeros{TeX Gyre Heros}
 \newfontfamily\fntHerosCn{TeX Gyre Heros Cn}
 \newfontfamily\fntPagella{TeX Gyre Pagella}
+\setjafamilyfont{jPixel}{PixelMplus12-Regular.ttf}
+\newcommand*{\fntPixel}{\jafamily{jPixel}}
+\setjafamilyfont{jKiloji}[BoldFont=kiloji - B]{kiloji}
 \newcommand*\fntTxtt{\usefont{T1}{txtt}{m}{n}}
 %% Beamer設定
 %\usetheme{Warsaw}
@@ -28,10 +31,11 @@
 \setbeamercovered{transparent}
 \definecolor{mycyan}{rgb}{0,1,1}% rgbのcyan
 \definecolor{mygood}{rgb}{0,0.45,0.06}
-\definecolor{mybad}{rgb}{0.45,0.05,0}
+\definecolor{mybad}{rgb}{0.6,0.1,0}
 \definecolor{myban}{rgb}{0.4,0.4.0.4}
 \colorlet{mygray}{black!55!white}
 \colorlet{mylgood}{mygood!25!white}
+\colorlet{mydbad}{mybad!75!black}
 \colorlet{mylbad}{mybad!25!white}
 \colorlet{mylban}{myban!25!white}
 
