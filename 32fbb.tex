@@ -1,0 +1,238 @@
+%
+% 32fbb.tex
+% 「その② バウンディングボックス詐称」
+
+%% 画像オブジェクト
+\pgfdeclareimage[width=0.75\paperwidth]%
+  {trial-fbb-ok}{image/trial-fbb-ok.pdf}
+\pgfdeclareimage[width=0.75\paperwidth]%
+  {trial-fbb-ng}{image/trial-fbb-ng.pdf}
+%
+\begin{mybgcolor}{mydbad}
+
+\begin{myframe}
+  \begin{center}\LARGE\color{white}
+    \mybadbkname[0.5]{②}{バウンディング\\ボックス詐称}%
+        {false bounding box}
+  \end{center}
+\end{myframe}
+
+\end{mybgcolor}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[font=\LARGE] at (0,3.5)
+        {\begin{minipage}{12\zw}\centering
+          バウンディングボックス\\
+          （bbox）って何
+        \end{minipage}};
+      \begin{onlyenv}<1>
+        \node[font=\Large] at (2.9,2.9)
+          {\myiswhat};
+      \end{onlyenv}
+      \begin{onlyenv}<2>
+        \node[font=\hhhhuge, text=mybanned] at (0,0)
+          {説明省略。};
+        \node[font=\huge\fntKiloji, text=structure] at (0,-3)
+          {そう、アレです。};
+      \end{onlyenv}
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \begin{onlyenv}<1-3>
+        \node[font=\LARGE] at (0,3.5)
+          {\begin{minipage}{10\zw}\centering
+            各々の画像は\alert{固有の}\\
+            bboxの値を持つ。
+          \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<4>
+        \node[font=\LARGE] at (0,3.5)
+          {\mygood{普通の}bbox指定の方法。};
+      \end{onlyenv}
+      \begin{onlyenv}<5>
+        \node[font=\LARGE] at (0,3.5)
+          {画像を\structure{“一部だけ”}挿入したい\！};
+      \end{onlyenv}
+      \begin{onlyenv}<6>
+        \node[font=\LARGE] at (0,3.5)
+          {\mybad{バッドな}bbox指定の方法。};
+      \end{onlyenv}
+      \begin{onlyenv}<1-2>
+        \node[right, text=structure, font=\bfseries] at (-4.8,1.5)
+          {image.eps};
+        \node[imframe] at (-3,-0.5) (Image)
+          {\pgfuseimage{texconf14eps}};
+      \end{onlyenv}
+      \begin{onlyenv}<2>
+        \node[right, text=black, font=\large] at (-1.5,-0.5)
+        {\begin{minipage}{12em}
+          \begin{itemize}
+          \item EPS形式
+          \item bbox =\par
+              \alert{[540 315 900 675]}
+          \end{itemize}
+        \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<3-6>
+        \node[right, text=structure, font=\bfseries] at (-4.8,1.5)
+          {image.png};
+        \node[imframe] at (-3,-0.5)
+          {\pgfuseimage{texconf14png}};
+        \node[right, text=black, font=\large] at (-1.5,-0.5)
+        {\begin{minipage}{12em}
+          \begin{itemize}
+          \item PNG形式
+          \item bbox =\par
+              \alert{[0 0 360 360]}
+          \end{itemize}
+        \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<5-6>
+        \coordinate (I1) at (Image.south west);
+        \coordinate (I2) at (Image.north east);
+        \path let
+          \p1=($(I1)!0.05!(I2)$),
+          \p2=($(I1)!0.45!(I2)$),
+          \p3=($(I1)!0.95!(I2)$)
+        in 
+          coordinate (P1) at (\x1,\y2)
+          coordinate (P2) at (\x3,\y3);
+        \begin{scope}[every node/.style={
+          text=structure, font=\small, fill=white, opacity=0.75}]
+          \begin{onlyenv}<5>
+            \node[below] at (I1) {(0,0)};
+            \node[above] at (I2) {(360,360)};
+            \node[below] at ($(P1) + (-0.4,0)$) {(18,162)};
+            \node[right] at ($(P2) + (0,-0.2)$) {(342,342)};
+            \fill[structure] (I1) circle[radius=4pt];
+            \fill[structure] (I2) circle[radius=4pt];
+            \fill[structure] (P1) circle[radius=4pt];
+            \fill[structure] (P2) circle[radius=4pt];
+          \end{onlyenv}
+          \draw[structure, very thick, dashed]
+            (P1) rectangle (P2);
+        \end{scope}
+        \node[right, draw=structure, thick, text=black, font=\large]
+          (T2) at (0.5,2)
+        {\begin{minipage}{9em}
+          \structure{“一部”} =\\
+          \mybad{[18 162 342 342]}
+        \end{minipage}};
+        \draw[->, structure, thick]
+          (T2.west) to[out=180, in=20] ($(P2)+(2pt,-1.0)$);
+      \end{onlyenv}
+      \begin{onlyenv}<3>
+        \node[text=black, font=\Large] at (0, -3.5)
+          {ビットマップ画像も同様。};
+      \end{onlyenv}
+      \begin{onlyenv}<4>
+        \node[goodcode, font=\large, xscale=0.85]
+          at (0,-3.5) (Src)
+          {\myverb{\\includegraphics[\mygood{bb=0 0 360 360}]%
+            \{\structure{image.png}\}}};
+        \draw[->, mygood, very thick]
+          (1.85,-1.4)--($(Src.north)+(1.20,-0.25)$);
+        \node[text=mygood, font=\hhuge] at (2.5,-2.3) {\facegood};
+        \node[text=mygood, font=\Large] at (4.0,-2.3) {普通。};
+      \end{onlyenv}
+      \begin{onlyenv}<6>
+        \node[badcode, font=\large, xscale=0.85]
+          at (0,-3.5) (Src)
+          {\myverb{\\includegraphics[\mybad{bb=18 162 342 342}]%
+            \{\structure{image.png}\}}};
+        \draw[<->, mybad, very thick]
+          (1.85,-1.4)--($(Src.north)+(1.25,-0.25)$);
+        \draw[->, mybad, very thick]
+          ($(T2.south)+(-1.5,0.25)$)--($(Src.north)+(-0.1,-0.25)$);
+        \node[text=mybad, font=\hhuge] at (2.5,-2.3) {\facebad};
+        \node[text=mybad, font=\Large] at (4.6,-2.3) {食い違う\！};
+      \end{onlyenv}
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[font=\LARGE] at (0,4)
+        {\mybad{“bbox詐称”}してみよう\！};
+      \node[descbox, font=\Large, opacity=0.8]
+        at (0,-0.6) (Desc)
+        {\begin{minipage}{15em}
+          \begin{itemize}
+          \item ドライバは\mygood{当然}%
+            “\myverb{dvipdfmx}”。
+          \item \structure{さっきの例}の通りに\\
+            PNG画像を\alert{“一部だけ”}挿入。
+            \par\smallskip
+            \begin{tikzpicture}
+              \node[badcode, font=\ttfamily\normalsize]
+                at (0,0) (Part2)
+                {\begin{minipage}{16em}
+                  \myverb{\\includegraphics}\\
+                  \myverb{\mbox{~~}[\alert{bb=18 162 342 342}}]%
+                  \{image.png\}
+                 \end{minipage}};
+            \end{tikzpicture}
+          \end{itemize}
+        \end{minipage}};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{mybgcolor}{mylbad}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[font=\LARGE] at (0,4)
+        {\alert{古い}{\TeX}環境で処理すると…};
+      \node[font=\large] at (0,3)
+        {（{\TeX} Live 2012）};
+      \node[imframe] at (0,0) {\pgfuseimage{trial-fbb-ok}};
+      \node[text=mybad, font=\hhhuge] at (-1.5,-3.5) {\facebad};
+      \node[text=mybad, font=\hhuge] at (1.5,-3.5) {正常。};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\end{mybgcolor}
+
+\begin{mybgcolor}{mylbanned}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[font=\LARGE] at (0,4)
+        {\alert{新しい}{\TeX}環境で処理すると…};
+      \node[font=\large] at (0,3)
+        {（{\TeX} Live 2014）};
+      \node[imframe] at (0,0) {\pgfuseimage{trial-fbb-ng}};
+      \node[text=mybanned, font=\hhhuge] at (-1.5,-3.5) {\facebanned};
+      \node[text=mybanned, font=\hhuge] at (1.5,-3.5) {破滅。};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{myframe}
+  \begin{center}\color{mybanned}
+    {\hhhuge 楽しい\！\！\！\par}
+    \myvspace{1}
+    {\Large \mytanoshy\par}
+  \end{center}
+\end{myframe}
+
+\end{mybgcolor}
+
+% EOF

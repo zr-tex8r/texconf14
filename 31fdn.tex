@@ -1,0 +1,215 @@
+%
+% 31fdn.tex
+% 「その① ドライバ詐称」
+%
+
+%% 画像オブジェクト
+\pgfdeclareimage[width=0.5\paperwidth]%
+  {trial-fdn-ok}{image/trial-fdn-ok.pdf}
+\pgfdeclareimage[width=0.5\paperwidth]%
+  {trial-fdn-ng}{image/trial-fdn-ng.pdf}
+%% 色
+\colorlet{myprompt}{green!75!black}
+
+\begin{mybgcolor}{mydbad}
+
+\begin{myframe}
+  \begin{center}\LARGE\color{white}
+    \mybadbkname{①}{ドライバ詐称}{false driver name}
+  \end{center}
+\end{myframe}
+
+\end{mybgcolor}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-3) rectangle (5.5,5);
+      \begin{onlyenv}<1-2>
+        \node[font=\LARGE] at (0,4)
+          {ドライバ指定};
+      \end{onlyenv}
+      \begin{onlyenv}<1>
+        \node[font=\Large] at (2.6,3.9)
+          {\myiswhat};
+      \end{onlyenv}
+      \begin{onlyenv}<3>
+        \node[font=\LARGE] at (0,4)
+          {\mygood{普通の}ドライバ指定};
+        \node[text=mygood, font=\hhuge] at (-2.7,-0.5) {\facegood};
+      \end{onlyenv}
+      \begin{onlyenv}<4-6>
+        \node[font=\LARGE] at (0,4)
+          {\mybad{バッドな}ドライバ指定};
+        \node[text=mybad, font=\hhuge] at (-2.7,-0.5) {\facebad};
+      \end{onlyenv}
+      \begin{onlyenv}<3-6>
+        \node[left, fill=black, text=white, font=\large\fntTxtt]
+          at (5.5,-2) (Com)
+          {\begin{minipage}{16em}\color{white}
+            \textcolor{myprompt}{[zr@here]\$} dvipdfmx talk.dvi
+          \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<2-3>
+        \node[right, goodcode, font=\ttfamily]
+          at (-5.5,2) (Src)
+          {\begin{minipage}{18em}
+            \myverb{\\documentclass[uplatex]\{jsarticle\}}\\
+            \myverb{\\usepackage[%
+              \only<2>{\alert{\bfseries dvipdfmx}}%
+              \only<3>{\textcolor{mygood}{\bfseries dvipdfmx}}%
+            ]\{graphicx\}}\\
+            \myverb{\\usepackage\{lisp-on-tex\}}\\
+            \myverb{\structure{\%...({\sffamily 以下略})...}}
+          \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<4-6>
+        \node[right, badcode, font=\ttfamily]
+          at (-5.5,2) (Src)
+          {\begin{minipage}{18em}
+            \myverb{\\documentclass[uplatex]\{jsarticle\}}\\
+            \myverb{\\usepackage[%
+              \only<4>{\textcolor{mybad}{\bfseries dvips}}%
+              \only<5>{\textcolor{mybad}{\bfseries dvipdfm}}%
+              \only<6>{\textcolor{mybad}{\bfseries dviout}}%
+            ]\{graphicx\}}\\
+            \myverb{\\usepackage\{lisp-on-tex\}}\\
+            \myverb{\structure{\%...({\sffamily 以下略})...}}
+          \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<2>
+        \node[text=alert, font=\Large]
+          at (0,-0.5) (Here)
+          {コレ\！};
+        \draw[<-, draw=alert, ultra thick]
+          (Src.center)+(-0.3,0.1)--(Here.north);
+      \end{onlyenv}
+      \begin{onlyenv}<3>
+        \node[text=mygood, font=\Large]
+          at (0,-0.5) (Here)
+          {一致\！};
+        \draw[<-, draw=mygood, ultra thick]
+          (Src.center)+(-0.3,0.1)--(Here.north);
+        \draw[<-, draw=mygood, ultra thick]
+          (Com.north)--(Here.south);
+      \end{onlyenv}
+      \begin{onlyenv}<4-6>
+        \node[text=mybad, font=\Large]
+          at (0,-0.5) (Here)
+          {食い違う\！\！};
+        \draw[<-, draw=mybad, ultra thick]
+          (Src.center)+(-0.3,0.1)--(Here.north);
+        \draw[<-, draw=mybad, ultra thick]
+          (Com.north)--(Here.south);
+      \end{onlyenv}
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \begin{onlyenv}<1-2>
+        \node[font=\LARGE] at (0,4)
+          {\textcolor{mybad}{“ドライバ詐称”}してみよう\！};
+      \end{onlyenv}
+      \begin{onlyenv}<1-2>
+        \node[examplecode, font=\ttfamily\scriptsize]
+          at (0,0) (Src)
+          {\begin{minipage}{32em}
+\myverb{\% upLaTeX 文書}\\
+\myverb{\\documentclass[a6paper,papersize,uplatex]\{jsarticle\}}\\
+\myverb{\structure{\\usepackage[dvips]\{graphicx\}}}\\
+\myverb{\\setlength\{\\fboxrule\}\{8pt\}}\\
+\myverb{\\setlength\{\\fboxsep\}\{0pt\}}\\
+\myverb{\\begin\{document\}}\\
+\myverb{ }\\
+\myverb{\\begin\{center\}\\LARGE}\\
+\myverb{\{\\TeX\}ユーザの集い2014}\\
+\myverb{\\par\\smallskip}\\
+\myverb{\\fbox\{\structure{\\includegraphics[width=3cm]\{image.eps\}}\}}\\
+\myverb{\\par\\smallskip}\\
+\myverb{は\\\\\{\\gtfamily アレ。\}}\\
+\myverb{\\end\{center\}}\\
+\myverb{ }\\
+\myverb{\\end\{document\}}
+          \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<2>
+        \node[descbox, font=\Large, opacity=0.8]
+          at (0,-0.6) (Desc)
+          {\begin{minipage}{15em}
+            \begin{itemize}
+            \item ドライバ指定は%
+              “\myverb{\alert{\textbf{dvips}}}”
+              \par\smallskip
+              \tikz{\node[badcode, font=\ttfamily\normalsize]
+                {\myverb{\\usepackage[\alert{\bfseries dvips}]%
+                  \{dvipdfmx\}}};}
+            \item \alert{EPS画像}を挿入する
+              \par\smallskip
+              \begin{tikzpicture}
+                \node[badcode, font=\ttfamily\normalsize, xscale=0.9]
+                  at (0,0) (Part2)
+                  {\myverb{\\includegraphics[width=3cm]%
+                    \{\alert{image.eps}\}}};
+                \node[imframe] at (0,-2.2) (Image)
+                  {\pgfuseimage{texconf14eps}};
+                \draw[<-, draw=black, thick]
+                  (Image.east) to[out=340, in=290] (3,-0.2);
+              \end{tikzpicture}
+            \end{itemize}
+          \end{minipage}};
+      \end{onlyenv}
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{mybgcolor}{mylbad}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[font=\LARGE] at (0,4)
+        {\alert{古い}{\TeX}環境で処理すると…};
+      \node[font=\large] at (0,3)
+        {（{\TeX} Live 2012）};
+      \node[imframe] at (0,0) {\pgfuseimage{trial-fdn-ok}};
+      \node[text=mybad, font=\hhhuge] at (-1.5,-3.5) {\facebad};
+      \node[text=mybad, font=\hhuge] at (1.5,-3.5) {正常。};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\end{mybgcolor}
+
+\begin{mybgcolor}{mylbanned}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[font=\LARGE] at (0,4)
+        {\alert{新しい}{\TeX}環境で処理すると…};
+      \node[font=\large] at (0,3)
+        {（{\TeX} Live 2014）};
+      \node[imframe] at (0,0) {\pgfuseimage{trial-fdn-ng}};
+      \node[text=mybanned, font=\hhhuge] at (-1.5,-3.5) {\facebanned};
+      \node[text=mybanned, font=\hhuge] at (1.5,-3.5) {破滅。};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{myframe}
+  \begin{center}\color{mybanned}
+    {\hhhuge 楽しい\！\！\par}
+    \myvspace{1}
+    {\Large \mytanoshy\par}
+  \end{center}
+\end{myframe}
+
+\end{mybgcolor}
+
+% EOF

@@ -1,0 +1,114 @@
+%
+% 33lip.tex
+% 「その③ 面倒なのでピクセル単位」
+%
+
+%% 画像オブジェクト
+\pgfdeclareimage[width=0.5\paperwidth]%
+  {trial-lip-ok}{image/trial-lip-ok.pdf}
+\pgfdeclareimage[width=0.5\paperwidth]%
+  {trial-lip-ng}{image/trial-lip-ng.pdf}
+
+\begin{mygroup}
+\setbeamercolor{background canvas}{bg=mydbad}
+\begin{frame}[plain]{}
+  \begin{center}\LARGE\color{white}
+    \mybadbkname[0.5]{③}{面倒なので\\ポイント単位}%
+        {lazily-in-point}
+  \end{center}
+\end{frame}
+\end{mygroup}
+
+\begin{mybgcolor}{mylbad}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[font=\LARGE] at (0,4)
+        {\alert{大昔の}{\TeX}環境では…};
+      \node[font=\large] at (0,3)
+        {（2005年頃の{\TeX}環境）};
+      \node[imframe] at (0,-0.3) {\pgfuseimage{trial-lip-ok}};
+      \node[text=mybad, font=\hhhuge] at (-1.5,-4) {\facebad};
+      \node[text=mybad, font=\hhuge] at (1.5,-4) {正常。};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[font=\LARGE] at (0,4)
+        {\alert{新しい}{\TeX}環境では…};
+      \node[font=\large] at (0,3)
+        {（{\TeX} Live 2014）};
+      \node[imframe] at (0,-0.3) {\pgfuseimage{trial-lip-ok}};
+      \node[text=mybad, font=\hhhuge] at (-1.5,-4) {\facebad};
+      \node[text=mybad, font=\hhuge] at (1.5,-4) {正常\！};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\end{mybgcolor}
+
+\begin{mybgcolor}{mylbanned}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[font=\LARGE] at (0,4)
+        {\alert{少し古い}{\TeX}環境では…};
+      \node[font=\large] at (0,3)
+        {（{\TeX} Live 2012）};
+      \node[imframe] at (0,-0.3) {\pgfuseimage{trial-lip-ng}};
+      \node[text=mybanned, font=\hhhuge] at (-1.5,-4) {\facebanned};
+      \node[text=mybanned, font=\hhuge] at (1.5,-4) {破滅。};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{myframe}
+  \begin{center}\color{mybanned}
+    {\hhhuge 楽しい…{}？\par}
+    \myvspace{1}
+    {\Large \mytanoshy\par}
+  \end{center}
+\end{myframe}
+
+\end{mybgcolor}
+
+\begin{mybgcolor}{mydbanned}
+
+\begin{myframe}
+  \begin{center}\color{white}
+    {\hhhhuge\bfseries 楽しくない\！\！\par}
+    \myvspace{1}
+    {\gigantic \facebanned\par}
+  \end{center}
+\end{myframe}
+
+\end{mybgcolor}
+
+\begin{mybgcolor}{mylgood}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[text=black, font=\hhuge\bfseries, xscale=0.95]
+        at (0,3) {\mygood{正しい}コードを書こう！};
+      \node[text=mygood, font=\gigantic] at (0,0) {\facegood};
+      \node[text=mygood, font=\fntVMin\LARGE, rotate=-90]
+        at (-1.9,-2.4) {まさに};
+      \node[text=mygood, font=\fntVMin\hhuge, rotate=-90]
+        at (-2.7,-3.0) {正論。};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\end{mybgcolor}
+
+% EOF

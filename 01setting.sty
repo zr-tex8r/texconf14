@@ -10,6 +10,8 @@
 \newcommand\hhhuge{\@setfontsize\hhuge{43.00}{48}}
 \newcommand\hhhhuge{\@setfontsize\hhhuge{51.60}{56}}
 \newcommand\hhhhhuge{\@setfontsize\hhhhuge{61.92}{66}}
+\newcommand\hhhhhhuge{\@setfontsize\hhhhhhuge{74.30}{80}}
+\newcommand\gigantic{\@setfontsize\gigantic{120}{120}}
 
 %% \myjdash: 倍角ダーシ
 \def\myjdash{―\kern-.5em―\kern-.5em―}
@@ -18,20 +20,6 @@
 \def\myverb#1{%
   {\let\\=\textbackslash
   \ttfamily #1}}
-
-%% TeX on LaTeX のロゴの「on」
-% 本来は small-caps にするのが正式であるが、
-% この文書のフォントでは対応していないので
-% サイズ縮小で代用している。
-\def\my@ONscale{0.72}
-\def\myON{%
-  \begingroup
-    \@tempdima=\f@size\p@
-    \@tempdima=\my@ONscale\@tempdima
-    \edef\@tempa{{\@tempdima}{\@tempdima}}%
-    \expandafter\fontsize\@tempa\selectfont
-    ON%
-  \endgroup}
 
 %% PDF文書情報中文字列
 \pdfstringdefDisableCommands{%
@@ -51,6 +39,8 @@
   \endgroup
 }
 
+%% \myoutlined{<縁色>}{<内部色>}{<テキスト>}
+% いわゆる"白抜き"の装飾(手抜き).
 \def\my@olofs{0.02}
 \def\my@outl@a#1#2{%
   \raise#1\my@olofs em\hbox to 0pt{\kern#2\my@olofs em\copy0\hss}}
@@ -62,6 +52,7 @@
   \endgroup
 }
 
+%% \zw : 全角幅
 \begingroup
   \catcode`\_=11
   \gdef\my@jascale{\__zxjt_scale_tl}
@@ -73,5 +64,8 @@
 \tracingoutput=2
 \showboxdepth=100
 \showboxbreadth=100
+\def\showcanvasframe{%
+  \tikzset{drawbb/.style={draw=blue!80!black}}
+}
 
 % EOF

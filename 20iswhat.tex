@@ -1,0 +1,190 @@
+%
+% 20badkh.tex
+% 「バッド・ノウハウの魔」
+%
+
+%% 画像オブジェクト
+\pgfdeclareimage[]%
+  {machigatteru}{image/machigatteru.pdf}
+\pgfdeclareimage[width=0.8\paperwidth]%
+  {texlive2015}{image/image-texlive2015.png}
+
+\begin{myframe}
+  \begin{center}
+    {\hhhuge \mybad{バッドノウハウ}}%
+    \visible<1>{\huge\myiswhat}
+    \begin{visibleenv}<2>
+      \myvspace{0.5}
+      \rotatebox{-90}{\hhhuge =}
+      \myvspace{0.5}
+      {\hhhhuge \fntPixel\myoutlined{black}{alert}{バグ技}}%
+    \end{visibleenv}
+  \end{center}
+\end{myframe}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \draw[structure, very thick](0,-4)--(0,3);
+      \node[above, fill=mygood, text=white, font=\Large]
+        at (-3,3) {\makebox[6\zw]{正攻法}};
+      \node[above, fill=mybad, text=white, font=\Large, xscale=0.8]
+        at (3,3) {バッド\・ノウハウ};
+      \node[above,font=\rmfamily\LARGE]
+        at (0,3) {vs};
+      \begin{onlyenv}<2->
+         \node[goodcode, font=\sffamily]
+           at (-3,1) (GoodIn)
+           {\begin{minipage}{5cm}
+             \myverb{\\begin\{document\}}\par
+             \medskip
+             \hspace*{1em}{\large 正しいコード\par}
+             \medskip
+             \myverb{\\end\{document\}}\par
+           \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<3->
+         \node[outbox, draw=mygood, font=\fntMin]
+           at (-3,-1.5) (GoodOut)
+           {\begin{minipage}{5cm}
+             \large 正しい出力結果
+           \end{minipage}};
+         \draw[->, ultra thick, mygood]
+           (GoodIn.south) -- (GoodOut.north);
+      \end{onlyenv}
+      \begin{onlyenv}<4->
+         \node[text=mygood, font=\LARGE] at (-3,-3.5)
+           {{\huge\facegood} 当然。};
+      \end{onlyenv}
+      \begin{onlyenv}<2>
+        \node[font=\Large] at (-3,-3.5)
+          {“仕様に従った”};
+      \end{onlyenv}
+      \begin{onlyenv}<5->
+         \node[badcode, font=\sffamily]
+           at (3,1) (BadIn)
+           {\begin{minipage}{5cm}
+             \myverb{\\begin\{document\}}\par
+             \medskip
+             \hspace*{1em}{\large\rmfamily
+                 \scalebox{0.9}[1]{マチガッテルコード}\par}
+             \medskip
+             \myverb{\\end\{document\}}\par
+           \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<6->
+         \node[outbox, draw=mybad, font=\fntMin]
+           at (3,-1.5) (BadOut)
+           {\begin{minipage}{5cm}
+             \large 正しい出力結果
+           \end{minipage}};
+         \draw[->, ultra thick, mybad]
+           (BadIn.south) -- (BadOut.north);
+      \end{onlyenv}
+      \begin{onlyenv}<7->
+         \node[text=mybad, font=\LARGE] at (3,-3.5)
+           {{\huge\facebad} 素敵。};
+      \end{onlyenv}
+      \begin{onlyenv}<5>
+        \node[font=\Large] at (3,-3.5)
+          {“仕様は\alert{未定義}”};
+      \end{onlyenv}
+    \end{tikzpicture}%
+  \end{mycenter}
+\end{myframe}
+
+\begin{myframe}
+  \begin{center}
+    {\huge バージョンアップ！\par}
+    \myvspace{0.5}
+    \pgfuseimage{texlive2015}
+  \end{center}
+\end{myframe}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \draw[structure, very thick](0,-4)--(0,3);
+      \node[above, fill=mygood, text=white, font=\Large]
+        at (-3,3) {\makebox[6\zw]{正攻法}};
+      \node[above, fill=mybad, text=white, font=\Large, xscale=0.8]
+        at (3,3) {バッド\・ノウハウ};
+      \node[above,font=\rmfamily\LARGE]
+        at (0,3) {vs};
+      \begin{onlyenv}<1->
+         \node[goodcode, font=\sffamily] 
+           at (-3,1) (GoodIn)
+           {\begin{minipage}{5cm}
+             \myverb{\\begin\{document\}}\par
+             \medskip
+             \hspace*{1em}{\large 正しいコード\par}
+             \medskip
+             \myverb{\\end\{document\}}\par
+           \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<2->
+         \node[outbox, draw=mygood, font=\fntMin]
+           at (-3,-1.5) (GoodOut)
+           {\begin{minipage}{5cm}
+             \large 正しい出力結果
+           \end{minipage}};
+         \draw[->, ultra thick, mygood]
+           (GoodIn.south) -- (GoodOut.north);
+         \node[text=mygood, font=\LARGE] at (-3,-3.5)
+           {{\huge\facegood} 当然。};
+      \end{onlyenv}
+      \begin{onlyenv}<1>
+        \node[font=\Large] at (-3,-3.5)
+          {“仕様に従った”};
+      \end{onlyenv}
+      \begin{onlyenv}<1->
+         \node[badcode, font=\sffamily]
+           at (3,1) (BadIn)
+           {\begin{minipage}{5cm}
+             \myverb{\\begin\{document\}}\par
+             \medskip
+             \hspace*{1em}{\large\rmfamily
+                 \scalebox{0.9}[1]{マチガッテルコード}\par}
+             \medskip
+             \myverb{\\end\{document\}}\par
+           \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<3->
+         \node[outbox, draw=mybad, inner sep=0pt]
+           at (3,-1.5) (BadOut)
+           {\pgfuseimage{machigatteru}};
+         \draw[->, ultra thick, mybad]
+           (BadIn.south) -- (BadOut.north);
+      \end{onlyenv}
+      \begin{onlyenv}<3->
+         \node[text=mybanned, font=\LARGE] at (3,-3.5)
+           {{\huge\facebanned} 破滅\！};
+      \end{onlyenv}
+      \begin{onlyenv}<1-2>
+        \node[font=\Large] at (3,-3.5)
+          {“仕様は\alert{未定義}”};
+      \end{onlyenv}
+    \end{tikzpicture}%
+  \end{mycenter}
+\end{myframe}
+
+\begin{mybgcolor}{mydbanned}
+
+\begin{myframe}
+  \begin{center}\LARGE\color{white}
+    \textcolor{mylbanned}{\bfseries 封印}された\\
+    バッド\・ノウハウは\par
+    \myvspace{0.5}
+    \textcolor{mylbanned}{\hhhhhuge\rmfamily 破滅}\par
+    \myvspace{0.5}
+    を生む\par
+    \myvspace{0.5}
+    {\hhhuge \textcolor{mylbanned}{\facebanned}}\par
+  \end{center}
+\end{myframe}
+
+\end{mybgcolor}
+
+% EOF

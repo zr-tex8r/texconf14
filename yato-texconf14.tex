@@ -4,7 +4,9 @@
 \usepackage{zxjatype}
 \usepackage{metalogo}
 \usepackage{tikz}% TikZはアレ
+\usetikzlibrary{calc}
 \input{02setting}% LaTeXレベルの設定
+%\showcanvasframe
 %----------------------------------------------------------------------
 %% 文書情報
 \title{dvipdfmxと3つのバッド・ノウハウ}
@@ -17,16 +19,20 @@
 %=======================================================================
 
 \input{10title}% タイトル
-\section{バッド・ノウハウの魔}
-\input{20badkh}
-\section{その① ドライバ詐称}
-\input{30fdn}
-\section{その② バウンディングボックス詐称}
-\input{31fbb}
-\section{その③ 面倒なのでピクセル単位}
-\input{32lip}
+\section{バッド・ノウハウ is 何}
+\input{20iswhat}
+\section{バッド・ノウハウ三銃士を連れてきたよ}
+\input{30example}
+\subsection{その① ドライバ詐称}
+\input{31fdn}
+\subsection{その② バウンディングボックス詐称}
+\input{32fbb}
+\subsection{その③ 面倒なのでピクセル単位}
+\input{33lip}
 \section{正しさのすすめ}
 \input{40justice}
+\section{御清聴アレ}
+\input{50happy}
 
 \end{document}
 % EOF
@@ -92,7 +98,7 @@ false driver name
 \usepackage[dvipdfmx]{graphicx}
 ;-)
 
-[zr@texconf14]$ dvipdfmx talk.dvi
+[zr@texconf14]$ talk.dvi
 
 
 ◇

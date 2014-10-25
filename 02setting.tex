@@ -25,52 +25,82 @@
 \newcommand*{\fntKiloji}{\jafamily{jKiloji}}
 \setjafamilyfont{jMogaMin}[BoldFont=* Bold]{MogaExMincho}% MogaEx明朝
 \newcommand*{\fntMin}{\jafamily{jMogaMin}\bfseries}% 太字
+\setjafamilyfont{jMogaVMin}
+  [BoldFont=* Bold, Vertical=RotatedGlyphs]{MogaExMincho}% MogaEx明朝
+\newcommand*{\fntVMin}{\jafamily{jMogaVMin}\bfseries}% 太字
 \newcommand*\fntTxtt{\usefont{T1}{txtt}{m}{n}}
 \newfontfamily\fntDjvSans{DejaVu Sans}
+
 %% Beamer設定
 %\usetheme{Warsaw}
 \setbeamertemplate{headline}[default]
 \setbeamertemplate{navigation symbols}{} 
 \usefonttheme{professionalfonts}
 \setbeamercovered{transparent}
+% 色
 \definecolor{mycyan}{rgb}{0,1,1}% rgbのcyan
 \definecolor{mygood}{rgb}{0,0.45,0.06}
 \definecolor{mybad}{rgb}{0.6,0.1,0}
-\definecolor{myban}{rgb}{0.4,0.4.0.4}
+\definecolor{mybanned}{rgb}{0.4,0.4.0.4}
 \colorlet{mygray}{black!55!white}
-\colorlet{mylgood}{mygood!25!white}
+\colorlet{mylgood}{mygood!15!white}
 \colorlet{mydbad}{mybad!75!black}
-\colorlet{mylbad}{mybad!25!white}
-\colorlet{mylban}{myban!25!white}
-
-% 基本色
+\colorlet{mylbad}{mybad!15!white}
+\colorlet{mydbanned}{mybanned!75!black}
+\colorlet{mylbanned}{mybanned!25!white}
 {\usebeamercolor*{structure}
  \usebeamercolor*{alerted text}}
 \colorlet{alert}{alerted text.fg}
 \colorlet{structure}{structure.fg}
-% 完全暗黒世界
-\setbeamercolor{my dark world}{fg=black!15!white,bg=black}
-{\usebeamercolor*{my dark world}}
-\colorlet{my dark alert}{red!80!black}
-%% 独自Beamer要素
-\setbeamercolor{my good block}{bg=mylgood}
-\setbeamercolor{my bad block}{bg=mylbad}
-\setbeamercolor{my banned block}{bg=mylban}
-%% テキストレイアウト
+\newcommand*{\mygood}{\textcolor{mygood}}
+\newcommand*{\mybad}{\textcolor{mybad}}
+\newcommand*{\mybanned}{\textcolor{mybanned}}
+\newenvironment{mybgcolor}[1]%
+  {\setbeamercolor{background canvas}{bg=#1}}%
+  {}
+
+%% TikZはアレ
+\tikzset{drawbb/.style={}}% \showcanvasframe で更新される
+\tikzset{%
+  imframe/.style={draw=black, fill=white, thin, inner sep=0.4pt},
+  goodcode/.style={draw=mygood, very thick, fill=mylgood,
+    text=black},
+  badcode/.style={draw=mybad, very thick, fill=mylbad,
+    text=black},
+  examplecode/.style={draw=mydbanned, very thick, text=black},
+  outbox/.style={very thick, fill=white, text=black},
+  descbox/.style={draw=structure, thick, fill=white, text=black},
+}
+
+%% テキスト
+% レイアウト
 \newcommand*\mycompressitems{\setlength{\itemsep}{0pt}}
-\newcommand\mypara[2]{\par{#1#2\par}}
-\newcommand\latexmood[1]{\mbox{}{\color{mylatex}#1}}
-\newcommand\texmood[1]{\mbox{}{\color{mytex}#1}}
-%% その他の設定
-\newenvironment{mygroup}{}{}
-\newcommand*{\myhac}[1][-0.4]{\hspace*{#1cm}}
 \newcommand*\myvspace[1]{\par\vspace{#1\baselineskip}}
 \newcommand*\mynormvspace[1]{{\par\normalsize\vspace{#1\baselineskip}}}
+\newenvironment{mycenter}
+  {\begin{center}\myhac}%
+  {\end{center}}
+\newenvironment{myframe}
+  {\begin{frame}[plain]\relax}%
+  {\end{frame}}
+% 装飾
+\newcommand*{\myiswhat}{\makebox[0pt][l]{\sffamily\bfseries\alert{?}}}
 \newcommand*\・{\makebox[0.5\zw]{・}}
+\newcommand*\！{\makebox[0.5\zw]{！}}
+
 % フェイスマーク
 \newcommand*\facechar[1]{{\fntDjvSans\symbol{"#1}}}
 \newcommand*\facegood{\facechar{263A}}% WHITE SMILING FACE
 \newcommand*\facebad{\facechar{1F601}}% GRINNING FACE WITH SMILING EYES
 \newcommand*\facebanned{\facechar{1F62D}}% LOUDLY CRYING FACE
+\newcommand*\✌{{\fntDjvSans\raisebox{-0.1em}{\scalebox{1.8}[1.5]{%
+  \makebox[0.5em]{✌}}}}}
+\newcommand*\mytanoshy{\textrawen{%
+\✌('ω'\✌ )三\✌('ω')\✌三( \✌'ω')\✌%
+}}
+
+%% その他の設定
+\newenvironment{mygroup}{}{}
+\newcommand*{\myhac}[1][-0.25]{\hspace*{#1cm}}
 
 % EOF

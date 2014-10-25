@@ -2,4 +2,129 @@
 % 40justice.tex
 % 「正しさのすすめ」
 %
+
+
+%% 画像オブジェクト
+\pgfdeclareimage[width=0.75\paperwidth]%
+  {texlogopart}{image/trial-fbb-ok.pdf}
+
+%% 名前紹介のレイアウト
+\newcommand*{\mygoodstep}[3][1]{%
+  {\large\rmfamily ステップ~%
+    {\LARGE\rmfamily #2}%
+  \par}
+  \myvspace{#1}
+  {\hhhuge\bfseries #3\par}%
+}
+
+\begin{mybgcolor}{mygood}
+\begin{myframe}\color{white}
+  \begin{center}
+    \mygoodstep{⓪}{dvipdfmx\\を使う}
+  \end{center}
+\end{myframe}
+\end{mybgcolor}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[text=mybanned, font=\hhuge\bfseries]
+        at (0,1) {dvipdfm};
+      \begin{onlyenv}<2>
+      \draw[alert, line width=4pt]
+        (-3.2,1.7)--(3.2,0.3)
+        (3.2,1.7)--(-3.2,0.3);
+      \node[text=mygood, font=\hhuge\bfseries]
+        at (0,-1) {dvipdfm\alert{x}};
+      \end{onlyenv}
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{mybgcolor}{mygood}
+\begin{myframe}\color{white}
+  \begin{center}
+    \mygoodstep{①}{extractbb\\自動起動設定}
+  \end{center}
+\end{myframe}
+\end{mybgcolor}
+
+\begin{mybgcolor}{mygood}
+\begin{myframe}\color{white}
+  \begin{center}
+    \mygoodstep{②}{graphicx\\読込}
+  \end{center}
+\end{myframe}
+\end{mybgcolor}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \begin{onlyenv}<1>
+        \node[text=mygood, font=\huge] at (0,1.5)
+          {graphicxに\alert{\bfseries dvipdfmx}。};
+      \end{onlyenv}
+      \node[right, text=black, font=\Large\ttfamily] at (-5.7,0)
+        {\myverb{\\usepackage[\alert{dvipdfmx}]\{graphicx\}}};
+      \begin{onlyenv}<2>
+        \node[text=mygood, font=\huge] at (0,1.5)
+          {colorにも\alert{\bfseries dvipdfmx}。};
+        \node[right, text=black, font=\Large\ttfamily] at (-5.7,-1)
+          {\myverb{\\usepackage[\alert{dvipdfmx}]\{color\}}};
+      \end{onlyenv}
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{mybgcolor}{mygood}
+\begin{myframe}\color{white}
+  \begin{center}
+    \mygoodstep{③}{画像を挿入}
+  \end{center}
+\end{myframe}
+\end{mybgcolor}
+
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \begin{onlyenv}<1>
+        \node[text=mygood, font=\huge] at (0,1.5)
+          {bbは\alert{無し}。};
+        \node[text=black, font=\Large\ttfamily] at (0,0)
+          {\myverb{\\includegraphics\{image.png\}}};
+      \end{onlyenv}
+      \begin{onlyenv}<2>
+        \node[text=mygood, font=\huge] at (0,1.5)
+          {“一部だけ”→\alert{\bfseries viewport}。};
+        \node[text=black, font=\Large\ttfamily] at (0,-1)
+          {\begin{minipage}{14em}
+            \myverb{\\includegraphics}\\
+            \myverb{\mbox{~~}[\alert{viewport=18 162 342 342}]}\\
+            \myverb{\mbox{~~}\\\{image.png\}}
+          \end{minipage}};
+      \end{onlyenv}
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+
+\begin{mybgcolor}{mylgood}
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[text=mygood, font=\hhuge] at (-5,-4) {\facegood};
+      \node[text=mygood, font=\hhuge] at (+5,-4) {\facegood};
+      \node[text=mygood, font=\hhuge] at (-5,+4) {\facegood};
+      \node[text=mygood, font=\hhuge] at (+5,+4) {\facegood};
+      \node[imframe] at (0,0) {\pgfuseimage{texlogopart}};
+      \node[text=mygood, font=\hhuge] at (0,3.5)
+        {大成功。};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+\end{mybgcolor}
+
 % EOF

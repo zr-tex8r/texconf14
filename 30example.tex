@@ -1,0 +1,26 @@
+%
+% 30example.tex
+% 「バッド・ノウハウ三銃士を連れてきたよ」
+%
+
+%% 画像オブジェクト
+\pgfdeclareimage[width=0.25\paperwidth]%
+  {texconf14eps}{image/texconf14logo-eps.eps}
+\pgfdeclareimage[width=0.25\paperwidth]%
+  {texconf14pdf}{image/texconf14logo-pdf.pdf}
+\pgfdeclareimage[width=0.25\paperwidth]%
+  {texconf14png}{image/texconf14logo-png.png}
+
+
+%% 名前紹介のレイアウト
+\newcommand*{\mybadbkname}[4][1]{%
+  {\large\rmfamily バッド\・ノウハウ\quad その%
+    {\LARGE\rmfamily #2}%
+  \par}
+  \myvspace{#1}
+  {\hhhuge\bfseries #3\par}%
+  \myvspace{#1}
+  {\LARGE\rmfamily #4}%
+}
+
+% EOF

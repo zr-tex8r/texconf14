@@ -1,0 +1,27 @@
+%
+% 40justice.tex
+% 「正しさのすすめ」
+%
+
+\begin{mybgcolor}{mylgood}
+\begin{myframe}
+  \begin{mycenter}
+    \begin{tikzpicture}
+      \useasboundingbox[drawbb](-5.5,-4.5) rectangle (5.5,4.5);
+      \node[text=mygood, font=\hhuge] at (-5,-4) {\facegood};
+      \node[text=mygood, font=\hhuge] at (+5,-4) {\facegood};
+      \node[text=mygood, font=\hhuge] at (-5,+4) {\facegood};
+      \node[text=mygood, font=\hhuge] at (+5,+4) {\facegood};
+      \node[right, text=mygood, font=\rmfamily\hhhhhhuge]
+        at (-5,1.5) {Happy};
+      \node[left, text=mygood, font=\rmfamily\hhhhhhuge]
+        at (4.6,-1.5) {{\TeX}ing};
+      \node[right, text=mygood, font=\rmfamily\hhhhhhuge,
+        xslant=0.3, yscale=1.2]
+        at (4.5,-1.4) {!\strut};
+    \end{tikzpicture}
+  \end{mycenter}
+\end{myframe}
+\end{mybgcolor}
+
+% EOF

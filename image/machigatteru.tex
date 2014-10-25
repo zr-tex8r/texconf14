@@ -1,0 +1,26 @@
+
+
+
+
+
+
+
+
+
+
+
+\documentclass{standalone}
+\usepackage{graphicx}
+\usepackage{zxjatype,calc}
+\setjafontscale{0.925}
+\setjamainfont[BoldFont=* Bold]{MogaExMincho}
+\newlength{\ZW}
+\begin{document}
+\settowidth{\ZW}{\LARGE\bfseries あ}%
+\raisebox{0pt}[0.88\ZW+3pt][0.12\ZW+3pt]{\makebox[5cm+6pt][l]{%
+\LARGE\bfseries\hspace*{-0.4\ZW}%
+\raisebox{-0.2\ZW}{\rotatebox{10}{間違った}}%
+\scalebox{1.5}[0.8]{出力結果}%
+}}
+\end{document}
+
