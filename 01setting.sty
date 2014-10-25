@@ -62,6 +62,12 @@
   \endgroup
 }
 
+\begingroup
+  \catcode`\_=11
+  \gdef\my@jascale{\__zxjt_scale_tl}
+  \gdef\zw{\dimexpr\my@jascale em\relax}
+\endgroup
+
 % デバッグ用設定
 \errorcontextlines=9
 \tracingoutput=2

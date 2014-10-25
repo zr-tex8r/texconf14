@@ -16,7 +16,77 @@
   \end{center}
 \end{frame}
 \begin{frame}[plain]{}
-    {\hhhhuge \fntPixel\alert{バグ技}}%
+  \begin{center}
+    \myhac[-0.6]
+    \begin{tikzpicture}
+        [every node/.style={font=\rmfamily}]
+      \useasboundingbox[draw](-6,-4.5) rectangle (6,4.5);
+      \draw[structure, very thick](0,-4)--(0,3);
+      \node[above,fill=mygood,text=white,font=\Large]
+        at (-3,3) {\makebox[6\zw]{正攻法}};
+      \node[above,fill=mybad,text=white,font=\Large,xscale=0.8]
+        at (3,3) {バッド\・ノウハウ};
+      \node[above,font=\rmfamily\LARGE]
+        at (0,3) {vs};
+      \begin{onlyenv}<2->
+         \node[draw=mygood, very thick, fill=mylgood, text=black,
+             font=\sffamily] at (-3,1) (GI)
+           {\begin{minipage}{5cm}
+             \myverb{\\begin\{document\}}\par
+             \medskip
+             \hspace*{1em}{\large 正しいコード\par}
+             \medskip
+             \myverb{\\end\{document\}}\par
+           \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<3->
+         \node[draw=mygood, very thick, fill=white, text=black,
+             font=\fntMin] at (-3,-1.5) (GO)
+           {\begin{minipage}{5cm}
+             \large 正しい出力結果
+           \end{minipage}};
+         \draw[->, ultra thick, mygood]
+           (GI.south) -- (GO.north);
+      \end{onlyenv}
+      \begin{onlyenv}<4->
+         \node[text=mygood, font=\LARGE] at (-3,-3.5)
+           {{\huge\facegood} 当然。};
+      \end{onlyenv}
+      \begin{onlyenv}<2>
+        \node[font=\Large] at (-3,-3.5)
+          {“仕様に従った”};
+      \end{onlyenv}
+      \begin{onlyenv}<5->
+         \node[draw=mybad, very thick, fill=mylbad, text=black,
+             font=\sffamily] at (3,1) (BI)
+           {\begin{minipage}{5cm}
+             \myverb{\\begin\{document\}}\par
+             \medskip
+             \hspace*{1em}{\large\rmfamily
+                 \scalebox{0.9}[1]{マチガッテルコード}\par}
+             \medskip
+             \myverb{\\end\{document\}}\par
+           \end{minipage}};
+      \end{onlyenv}
+      \begin{onlyenv}<6->
+         \node[draw=mybad, very thick, fill=white, text=black,
+             font=\fntMin] at (3,-1.5) (BO)
+           {\begin{minipage}{5cm}
+             \large 正しい出力結果
+           \end{minipage}};
+         \draw[->, ultra thick, mybad]
+           (BI.south) -- (BO.north);
+      \end{onlyenv}
+      \begin{onlyenv}<7->
+         \node[text=mybad, font=\LARGE] at (3,-3.5)
+           {{\huge\facebad} 素敵。};
+      \end{onlyenv}
+      \begin{onlyenv}<5>
+        \node[font=\Large] at (3,-3.5)
+          {“仕様は\alert{未定義}”};
+      \end{onlyenv}
+    \end{tikzpicture}%
+  \end{center}
 \end{frame}
 \begin{frame}[plain]{}
     {\hhhhuge \fntPixel\bfseries\alert{バグ技}}%
