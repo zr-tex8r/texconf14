@@ -25,7 +25,7 @@
 \pdfstringdefDisableCommands{%
   \def\<{}%
   \def\>{}%
-  \def\myON{on}%
+  \def\:{}%
   \def\myjdash{――}%
 }
 
@@ -58,6 +58,13 @@
   \gdef\my@jascale{\__zxjt_scale_tl}
   \gdef\zw{\dimexpr\my@jascale em\relax}
 \endgroup
+
+%% \: : 半角空き
+\def\:{%
+  \ifmmode \mskip\medmuskip
+  \else \hskip0.5\zw
+  \fi
+}
 
 % デバッグ用設定
 \errorcontextlines=9

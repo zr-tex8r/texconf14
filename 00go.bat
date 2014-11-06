@@ -30,5 +30,6 @@ goto clean
 for %%x in ( nav out snm toc vrb xdv) do (
   if exist %SRC%.%%x del %SRC%.%%x
 )
+if exist missfont.log del missfont.log
 popd
 :exit
