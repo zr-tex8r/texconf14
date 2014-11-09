@@ -1,0 +1,10 @@
+# dvipdfmxと3つのバッド・ノウハウ
+
+[「TeXユーザの集い2014」](http://texconf14.tumblr.com/)でのLT発表のスライドのソース（XeLaTeX + Beamer）一式。
+
+`example/` ディレクトリの下に「バッドノウハウのサンプル」がある。
+
+  * example-fdn.tex： ドライバ詐称
+  * example-fbb.tex： バウンディングボックス詐称
+  * example-lip-1.tex： 面倒だからピクセル単位(1)
+  * example-lip-2.tex： 面倒だからピクセル単位(2)
